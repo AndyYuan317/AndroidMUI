@@ -1,0 +1,164 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.example.andyyuan.androidmui"
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        //NDK的支持so文件
+        ndk {
+            abiFilters 'armeabi', 'x86'
+//            , 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'//加入需要生成的文件夹
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    allprojects {
+        repositories {
+            jcenter()
+            mavenCentral()
+        }
+    }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    packagingOptions {
+
+        exclude 'META-INF/rxjava.properties'
+        doNotStrip "*/*/libvad.dnn.so"
+        doNotStrip "*/*/libbd_easr_s1_merge_normal_20151216.dat.so"
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+//统一项目中的构建版本，防止不同版本构建出现的冲突问题
+configurations.all {
+    resolutionStrategy.eachDependency {
+        DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'com.android.support') {
+                if (!requested.name.startsWith("multidex")) {
+                    details.useVersion '27.0.2'//此处为你需要的版本
+                }
+            }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.aar'], dir: 'libs')
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    implementation 'com.android.support:design:27.1.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //集成小讯的远程依赖
+
+    //    implementation(name: 'app-release', ext: 'aar')
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    implementation 'io.reactivex:rxjava:1.2.0'
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'homhomlin.lib:ptrrv-library:1.3.1'
+
+    //google权限申请
+    implementation 'pub.devrel:easypermissions:1.1.2'
+
+    //搜索控件需要
+    implementation 'com.android.support:cardview-v7:27.0.2'
+
+    //实现图片圆形化
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
+
+    //百度语音听写模块
+
+    //Popupwindow
+    implementation 'com.labo.kaji:relativepopupwindow:0.3.1'
+
+    //声音波纹
+    implementation 'com.carlos.voiceline:mylibrary:1.0.6'
+
+    //基础工具库
+
+    //implementation 'com.github.vondear.RxTool:RxKit:v2.2.7'
+
+    //UI库
+
+    //implementation 'com.github.vondear.RxTool:RxUI:v2.2.7'
+
+    //implementation "com.github.vondear.RxTool:RxFeature:v2.2.7"
+
+    //功能库（Zxing扫描与生成二维码条形码）
+    implementation 'com.github.XuDaojie:QRCode-Android:v0.4.2'
+
+    //图片加载
+    implementation 'com.github.bumptech.glide:glide:4.0.0'
+    implementation 'jp.wasabeef:glide-transformations:3.0.1'
+    implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
+    implementation 'cn.finalteam.rxgalleryfinal:library:1.0.9'
+    implementation 'com.android.support:multidex:1.0.1'
+
+    // 高德地图，定位相关
+    implementation 'com.amap.api:map2d:latest.integration'
+    implementation 'com.amap.api:location:latest.integration'
+    implementation 'com.amap.api:search:latest.integration'
+
+    //通讯录依赖库
+    implementation 'com.tbruyelle.rxpermissions:rxpermissions:0.9.1'
+    implementation 'com.github.promeg:tinypinyin:2.0.0'
+
+    // ~80KB
+
+    //微信分享、登录、收藏、支付等功能需要的库以及文件
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+
+    //版本更新
+    implementation 'com.allenliu.versionchecklib:library:2.0.8'
+    implementation 'com.bigkoo:alertview:1.0.3'
+
+    //图片缩放
+
+    //compile 'com.github.chrisbanes:PhotoView:2.0.0'
+
+    //热修复
+
+    // 远程仓库集成方式（推荐）
+    implementation 'com.tencent.bugly:crashreport_upgrade:1.3.6'
+
+    // 指定tinker依赖版本（注：应用升级1.3.5版本起，不再内置tinker）
+
+    //compile 'com.tencent.tinker:tinker-android-lib:1.9.9'
+    implementation 'cjt.library.wheel:camera:1.0.2'
+
+    //leakCanary内存泄漏检测
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
+//    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
+
+    // Optional, if you use support library fragments:
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.2'
+
+    //添加消息未读的角标
+    implementation 'me.leolin:ShortcutBadger:1.1.22@aar'
+}

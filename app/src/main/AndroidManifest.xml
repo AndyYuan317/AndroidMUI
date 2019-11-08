@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.andyyuan.androidmui">
+
+    <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--hellomui中需要的权限-->
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
+    <uses-permission android:name="RECEIVE_USER_PRESENT"/>
+
+    <!--集成小讯需要的权限-->
+    <!-- 加入aar包需要的权限 -->
+    <!-- 定位相关 -->
+    <!--<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
+    <!--<uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />-->
+    <!--<uses-permission android:name="android.permission.GET_TASKS" />-->
+    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
+    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+    <!--<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
+    <!--<uses-permission-->
+        <!--android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"-->
+        <!--tools:ignore="ProtectedPermissions" />-->
+    <!--<uses-permission android:name="android.permission.CAMERA" />-->
+    <!--<uses-permission android:name="android.permission.VIBRATE" />-->
+    <!--<uses-permission android:name="android.permission.RESTART_PACKAGES" />-->
+    <!--<uses-permission android:name="android.permission.RECORD_AUDIO" />-->
+    <!--<uses-permission android:name="com.sonyericsson.permission.CAMERA_EXTENDED" />-->
+    <!--<uses-permission android:name="android.permission.WAKE_LOCK" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
+    <!--<uses-permission android:name="android.permission.READ_CONTACTS" />-->
+    <!--<uses-permission android:name="android.permission.WRITE_CONTACTS" />-->
+    <!--&lt;!&ndash; WiFi访问权限，语音和视频通话需要 &ndash;&gt;-->
+    <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
+    <!--&lt;!&ndash; 静音权限 &ndash;&gt;-->
+    <!--<uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />-->
+    <!--&lt;!&ndash; 开启扬声器 &ndash;&gt;-->
+    <!--<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />-->
+    <!--&lt;!&ndash; 发送短信 &ndash;&gt;-->
+    <!--<uses-permission android:name="android.permission.SEND_SMS" />-->
+
+    <!--&lt;!&ndash; 实现开机收到开机广播 &ndash;&gt;-->
+    <!--<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />-->
+
+    <!--&lt;!&ndash; ===================================【通用模块】音视频聊天 START==================================== &ndash;&gt;-->
+    <!--&lt;!&ndash; 使用openGL &ndash;&gt;-->
+    <!--<uses-feature-->
+        <!--android:glEsVersion="0x00020000"-->
+        <!--android:required="true" />-->
+    <!--&lt;!&ndash; 修改声音设置 &ndash;&gt;-->
+    <!--&lt;!&ndash; <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> &ndash;&gt;-->
+    <!--<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />-->
+
+
+
+    <application
+        android:name=".MyApplication"
+        android:allowClearUserData="true"
+        android:hardwareAccelerated="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:largeHeap="true"
+        android:persistent="true"
+        tools:replace="android:name"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name="io.dcloud.PandoraEntry"
+            android:configChanges="orientation|keyboardHidden|keyboard|navigation"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+
+            android:theme="@style/TranslucentTheme"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- 不能直接设置成这样android:screenOrientation="portrait"-->
+        <activity
+            android:name=".SDK_WebView"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
+
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <activity android:name=".MainActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <!-- 导入原来com.im. -->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.launch.AppStart"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:label="@string/app_name2"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:theme="@style/AppTheme.NoActionBar">-->
+
+            <!--&lt;!&ndash; <intent-filter> &ndash;&gt;-->
+            <!--&lt;!&ndash; <action android:name="android.intent.action.MAIN" /> &ndash;&gt;-->
+
+
+            <!--&lt;!&ndash; <category android:name="android.intent.category.LAUNCHER" /> &ndash;&gt;-->
+            <!--&lt;!&ndash; </intent-filter> &ndash;&gt;-->
+        <!--</activity>-->
+
+        <!--&lt;!&ndash; <provider &ndash;&gt;-->
+        <!--&lt;!&ndash; android:name="com.im.utils.FileProviders" &ndash;&gt;-->
+        <!--&lt;!&ndash; android:authorities="com.im.fileprovider" &ndash;&gt;-->
+        <!--&lt;!&ndash; android:exported="false" &ndash;&gt;-->
+        <!--&lt;!&ndash; android:grantUriPermissions="true"> &ndash;&gt;-->
+        <!--&lt;!&ndash; <meta-data &ndash;&gt;-->
+        <!--&lt;!&ndash; android:name="android.support.FILE_PROVIDER_PATHS" &ndash;&gt;-->
+        <!--&lt;!&ndash; android:resource="@xml/filepaths" /> &ndash;&gt;-->
+        <!--&lt;!&ndash; </provider> &ndash;&gt;-->
+
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.launch.LoginActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:theme="@style/AppTheme.NoActionBar"-->
+            <!--android:windowSoftInputMode="adjustUnspecified|stateHidden" />-->
+
+        <!--&lt;!&ndash; 注册 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.login.register.RegisterActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+
+        <!--&lt;!&ndash; 设置密码 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.login.register.SetPasswordActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--&lt;!&ndash; 忘记密码 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.login.forget.ResetActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--&lt;!&ndash; 忘记密码 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.login.forget.ForgetActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--&lt;!&ndash; 黑名单 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.user.blacklist.LinkBlackListActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+
+        <!--&lt;!&ndash; 主界面 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.launch.PortalActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+
+        <!--&lt;!&ndash; 我的 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.user.MyActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--&lt;!&ndash; 稍后处理 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.alarm.later.LaterProcessActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+
+        <!--&lt;!&ndash; 个人中心 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.user.userinfo.PersonInfoActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+
+        <!--&lt;!&ndash; 账号安全 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.user.safe.AccountSafeActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--&lt;!&ndash; 通知管理 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.user.notice.NoticeManagerActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+
+        <!--&lt;!&ndash; 聊天管理 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.user.chat.ChatManagerActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--&lt;!&ndash; //语言选择界面 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.user.chat.ChoseLanguageActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+
+        <!--&lt;!&ndash; 收藏 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.user.collect.UserCollectActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--&lt;!&ndash; //修改昵称 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.user.userinfo.ChangeNickNameActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+
+        <!--&lt;!&ndash; 二维码界面 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.user.code.QrCodeActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--&lt;!&ndash; //联系人信息 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.user.linkinfo.LinkInfoActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--&lt;!&ndash; //手机联系人邀请好友 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.ContactInviteActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--&lt;!&ndash; //通过联系人添加小讯好友 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.ContactAddFriendActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--&lt;!&ndash; //文件展示 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.user.linkinfo.file.ShowGetFileActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+
+        <!--&lt;!&ndash; 聊天内容 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.user.linkinfo.chatCotent.ChatCotentActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.module.user.linkinfo.chatCotent.GroupChatCotentActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.register.RegisterActivity"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="adjustUnspecified|stateHidden" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.register.ForgetPassWordActivity"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="adjustUnspecified|stateHidden" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.register.RegisterSuccessActivity"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:theme="@android:style/Theme.Light.NoTitleBar"-->
+            <!--android:windowSoftInputMode="adjustUnspecified|stateHidden" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.alarm.AlarmsActivity"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="adjustPan|stateHidden" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.alarm.search_record.SearchRecordActivity"-->
+            <!--android:windowSoftInputMode="stateVisible" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.chat_friend.ui.activity.SearchContactActivity"-->
+            <!--android:windowSoftInputMode="stateVisible" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.alarm.activity.AlarmActivity"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="adjustPan|stateHidden" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.chat_friend.ui.activity.RosterActivity_2_5"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.chat_friend.sendimg.PreviewAndSendActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="adjustUnspecified|stateHidden" />-->
+        <!--<activity-->
+            <!--android:name="com.im.eva.widget.ImageViewActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="adjustUnspecified|stateHidden" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.chat_friend.sendfile.BigFileViewerActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="adjustUnspecified|stateHidden" />-->
+
+        <!--&lt;!&ndash; ============================ TempChat ============================ &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.chat_guest.TempChatActivity"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="adjustUnspecified|stateHidden" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.chat_friend.ChatActivity"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="adjustUnspecified|stateHidden" />-->
+
+        <!--&lt;!&ndash; ============================ BBSChat ============================ &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.chat_group.GroupChattingActivity"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="adjustUnspecified|stateHidden" />-->
+
+        <!--&lt;!&ndash; ============================ 【实时音视频】 START ============================ &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.chat_friend.vv.VideoActivityNew"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="adjustUnspecified|stateHidden" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.chat_friend.vv.VideoCallOutActivity"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.chat_friend.vv.VideoCallComeActivity"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--&lt;!&ndash; ============================ 【实时音视频】 END ============================ &ndash;&gt;-->
+
+
+        <!--&lt;!&ndash; 个人中心 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.more.HelpActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:theme="@style/AppTheme.NoActionBar" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.more.AboutActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.more.SendMailActivity"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.more.MoreActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.more.CommonWebActivity"-->
+            <!--android:screenOrientation="portrait" />-->
+
+        <!--&lt;!&ndash; 设置 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.more.SettingActivity"-->
+            <!--android:screenOrientation="portrait" />-->
+
+        <!--&lt;!&ndash; 通知管理 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.more.NotificaManagerActivity"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.profile.photo.PhotosViewActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="adjustUnspecified|stateHidden" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.profile.photo.PreviewAndUploadActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="adjustUnspecified|stateHidden" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.profile.photo.ViewPhotoActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="adjustUnspecified|stateHidden" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.profile.voice.PVoiceViewActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="adjustUnspecified|stateHidden" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.sns.InviteFriendActivity"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.sns.FindFriendFormActivity"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.sns.FindFriendResultActivity"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.sns.FriendInfoActivity"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.sns.FriendReqProcessActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.sns.VerificationsActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="adjustUnspecified|stateHidden" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.ifile.ui.LFilePickerActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="stateHidden" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.sns_group.GroupMemberActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.sns_group.GroupsActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.sns_group.GroupInfoActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--&lt;!&ndash; 二维码扫码 &ndash;&gt;-->
+        <!--&lt;!&ndash; <activity &ndash;&gt;-->
+        <!--&lt;!&ndash; android:name="com.im.rainbowchat.logic.scaner_code.ScanerCodeActivity" &ndash;&gt;-->
+        <!--&lt;!&ndash; android:configChanges="keyboardHidden|orientation" &ndash;&gt;-->
+        <!--&lt;!&ndash; android:screenOrientation="portrait" /> &ndash;&gt;-->
+
+
+        <!--&lt;!&ndash; 展示图片 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.user.linkinfo.file.PicturePreviewActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait" />-->
+
+        <!--&lt;!&ndash; 展示视频 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.user.linkinfo.file.PictureVideoPlayActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--&lt;!&ndash; //历史头像昵称 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.module.user.linkinfo.history.HistoryActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait" />-->
+
+        <!--&lt;!&ndash; 所有小讯好友 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.chat_friend.ui.activity.AllContactActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--&lt;!&ndash; 所有小讯好友 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.chat_friend.FriendCardActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.chat_friend.ui.activity.SelectLocActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.chat_friend.ui.activity.AnimateLocationActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.module.user.userinfo.ChangePwdActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.im.eva.widget.cropimage.CropImage"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="stateHidden" />-->
+
+        <!--<service android:name="com.im.rainbowchat.service.GeniusService" />-->
+        <!--&lt;!&ndash; PayPal START &ndash;&gt;-->
+        <!--<service-->
+            <!--android:name="com.paypal.android.sdk.payments.PayPalService"-->
+            <!--android:exported="false" />-->
+
+        <!--&lt;!&ndash; 百度语音听写模块 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.baiduVoice.ActivityCommon"-->
+            <!--android:configChanges="orientation|keyboardHidden|screenLayout"-->
+            <!--android:label="在线识别"-->
+            <!--android:screenOrientation="portrait">-->
+
+            <!--&lt;!&ndash; <intent-filter> &ndash;&gt;-->
+            <!--&lt;!&ndash; <action android:name="android.intent.action.MAIN"/> &ndash;&gt;-->
+            <!--&lt;!&ndash; <category android:name="android.intent.category.LAUNCHER"/> &ndash;&gt;-->
+            <!--&lt;!&ndash; </intent-filter> &ndash;&gt;-->
+        <!--</activity>-->
+        <!--<activity-->
+            <!--android:name="com.im.baiduVoice.OnlineSetting"-->
+            <!--android:configChanges="orientation|keyboardHidden|screenLayout"-->
+            <!--android:label="在线识别设置"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:theme="@android:style/Theme.DeviceDefault.Light" />-->
+
+        <!--&lt;!&ndash; <meta-data &ndash;&gt;-->
+        <!--&lt;!&ndash; android:name="com.baidu.speech.APP_ID" &ndash;&gt;-->
+        <!--&lt;!&ndash; android:value="14623702" /> &ndash;&gt;-->
+        <!--&lt;!&ndash; <meta-data &ndash;&gt;-->
+        <!--&lt;!&ndash; android:name="com.baidu.speech.API_KEY" &ndash;&gt;-->
+        <!--&lt;!&ndash; android:value="T4uHNX9yA8yEqBrar0wXpw5v" /> &ndash;&gt;-->
+        <!--&lt;!&ndash; <meta-data &ndash;&gt;-->
+        <!--&lt;!&ndash; android:name="com.baidu.speech.SECRET_KEY" &ndash;&gt;-->
+        <!--&lt;!&ndash; android:value="pu5nRBDxhxDjrclbOUB4cUWj7BCFN3O2" /> &ndash;&gt;-->
+        <!--&lt;!&ndash; 高德地图 &ndash;&gt;-->
+        <!--<meta-data-->
+            <!--android:name="com.amap.api.v2.apikey"-->
+            <!--android:value="f8c33310941c985ae1bf45fc9f4a4b08" />-->
+        <!--&lt;!&ndash; 群中收发的文件，图片和视屏界面 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.rainbowchat.logic.sns_group.file.GroupShowGetFileActivity"-->
+            <!--android:launchMode="singleTask"-->
+            <!--android:screenOrientation="portrait" />-->
+
+        <!--&lt;!&ndash; 微信分享 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.im.wxapi.WXEntryActivity"-->
+            <!--android:exported="true"-->
+            <!--android:launchMode="singleInstance"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
+        <!--<activity android:name="com.im.rainbowchat.logic.sns_group.file.GroupShowPhotoItemActivity" />-->
+        <!--<activity android:name="com.im.rainbowchat.logic.more.AboutAppActivity" />-->
+
+        <!--&lt;!&ndash; 第三方音乐播放器的监听和开启service &ndash;&gt;-->
+        <!--<service-->
+            <!--android:name="com.im.utils.MusicService"-->
+            <!--android:process=":remote" />-->
+        <!--&lt;!&ndash; 热修复 &ndash;&gt;-->
+
+
+        <!--&lt;!&ndash; Bugly升级SDK配置开始 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.tencent.bugly.beta.ui.BetaActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenSize|locale"-->
+            <!--android:theme="@android:style/Theme.Translucent" />-->
+
+        <!--&lt;!&ndash; API 24以上配置,另外手机中安装的应用包名不能和authorities的值一样，不然就会出现本应用安装不成功的问题。 &ndash;&gt;-->
+        <!--&lt;!&ndash; <provider &ndash;&gt;-->
+        <!--&lt;!&ndash; android:name="android.support.v4.content.FileProvider" &ndash;&gt;-->
+        <!--&lt;!&ndash; android:authorities="com.tencent.bugly.hotfix.fileProvider" &ndash;&gt;-->
+        <!--&lt;!&ndash; android:exported="false" &ndash;&gt;-->
+        <!--&lt;!&ndash; android:grantUriPermissions="true"> &ndash;&gt;-->
+        <!--&lt;!&ndash; <meta-data &ndash;&gt;-->
+        <!--&lt;!&ndash; android:name="android.support.FILE_PROVIDER_PATHS" &ndash;&gt;-->
+        <!--&lt;!&ndash; android:resource="@xml/provider_paths" /> &ndash;&gt;-->
+        <!--&lt;!&ndash; </provider> &ndash;&gt;-->
+        <!--&lt;!&ndash; 打开app后， 每隔三秒自动检测，后台存活 &ndash;&gt;-->
+        <!--<service-->
+            <!--android:name="com.im.rainbowchat.service.AutoUpdateAliveService"-->
+            <!--android:enabled="true"-->
+            <!--android:exported="true" />-->
+        <!--&lt;!&ndash; 自启动监听6.0以后就不行了 &ndash;&gt;-->
+
+        <!--<receiver-->
+            <!--android:name="com.im.rainbowchat.utils.BroadcastReceiverBoot"-->
+            <!--android:enabled="true"-->
+            <!--android:exported="true">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.BOOT_COMPLETED" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+
+        <!--&lt;!&ndash; <service android:name=".rainbowchat.service.HeartBeatService" /> &ndash;&gt;-->
+
+
+        <!--&lt;!&ndash; 添加角标 &ndash;&gt;-->
+        <!--<service-->
+            <!--android:name="com.im.rainbowchat.service.BadgeIntentService"-->
+            <!--android:exported="false" />-->
+    </application>
+
+</manifest>
