@@ -3,7 +3,6 @@ package com.example.andyyuan.androidmui;
 import android.content.Context;
 import android.os.Build;
 
-import com.im.rainbowchat.MyApplication;
 
 import java.lang.reflect.Method;
 

@@ -9,15 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.im.rainbowchat.*;
-import com.im.rainbowchat.logic.alarm.activity.AlarmActivity;
-import com.im.rainbowchat.logic.chat_friend.ui.activity.RosterActivity_2_5;
-import com.im.rainbowchat.logic.sns_group.GroupsActivity;
-import com.im.rainbowchat.utils.IntentFactory;
-import com.im.utils.PreferenceUtil;
-
-import static com.im.module.contact.LinkContacts.TIME_LOAD_MIN;
-import com.example.andyyuan.androidmui.R;
 
 public class MainActivity extends AppCompatActivity {
 
